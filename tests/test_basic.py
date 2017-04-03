@@ -36,7 +36,7 @@ class TestCase(unittest.TestCase):
             os.mkdir(html_dir) # create directory in _trial_temp
         self.root = static.File(html_dir) # make _trial_temp/html the root html directory
         self.rid = random.randint(0,10000000)
-        self.hbs = HttpbService(1)
+        self.hbs = self._create_httpb_service()
         self.b = resource.IResource(self.hbs)
         self.root.putChild('xmpp-bosh', self.b)
 
@@ -70,10 +70,12 @@ class TestCase(unittest.TestCase):
             return self.server_protocol
         self.server_factory.buildProtocol = _rememberProtocolInstance
 
+    def _create_httpb_service(self):
+        """Creates an instance of HttpbService with default params"""
+        return HttpbService(1)
 
     def getURL(self, path = "xmpp-bosh"):
         return "http://127.0.0.1:%d/%s" % (self.port, path)
-
 
     def key(self,b):
         key, newkey = self.keys.getKey()

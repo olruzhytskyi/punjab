@@ -4,6 +4,7 @@ from twisted.words.xish import xpath
 from twisted.python import log
 
 from punjab import httpb_client
+from punjab.httpb import HttpbService
 
 import test_basic
 
@@ -438,3 +439,6 @@ class XEP0124TestCase(test_basic.TestCase):
         return d
 
 
+class XEP0124TestCaseRawMode(XEP0124TestCase):
+    def _create_httpb_service(self):
+        return HttpbService(1, use_raw=True)
