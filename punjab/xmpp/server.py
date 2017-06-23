@@ -174,6 +174,16 @@ class XMPPServerProtocol(xmlstream.XmlStream):
         """
         self.send("""<challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImNoZXNzcGFyay5jb20iLG5vbmNlPSJ0YUhIM0FHQkpQSE40eXNvNEt5cFlBPT0iLHFvcD0iYXV0aCxhdXRoLWludCIsY2hhcnNldD11dGYtOCxhbGdvcml0aG09bWQ1LXNlc3M=</challenge>""")  # noqa
 
+    def triggerSuccess(self):
+        """ send a fake success for testing
+        """
+        self.send("""<success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>dj1wTk5ERlZFUXh1WHhDb1NFaVc4R0VaKzFSU289</success>""")  # noqa
+
+    def triggerIQResponse(self):
+        """ send a fake iq response for testing
+        """
+        self.send("""<iq to='some_jid' type='result' id='uR4D5-7'/>""")  # noqa
+
     def triggerInvalidXML(self):
         """Send invalid XML, to trigger a parse error."""
         self.send("""<parse error=>""")

@@ -281,12 +281,12 @@ class Proxy:
                                           self.port or 80, self.factory)
         return self.factory.deferred
 
-    def send(self, b):
+    def send(self, msg):
         """ Send data to the web server. """
 
         # if keepalive is off we need a new query factory
         # TODO - put a check to reuse the factory, right now we open a new one.
-        d = self.connect(b)
+        d = self.factory.send(msg)
         return d
 
 
